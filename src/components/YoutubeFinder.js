@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 const YoutubeFinder = () => {
     const [input, setInput] = useState("");
@@ -8,6 +8,7 @@ const YoutubeFinder = () => {
         youtubeIdParser(input);
         setInput("");
     }
+
     const youtubeIdParser = (url)=>{
         let flag = false;
         let videoId = "";
@@ -25,9 +26,19 @@ const YoutubeFinder = () => {
 
             // console.log(`Current: ${url[index]} Previous: ${url[index-1]}`)
         }
-        console.log(videoId);
+        if(videoId===""){
+            console.log("Invalid ID");
+            return false;
+        }
+        console.log(`Video ID Found: ${videoId}`);
+        commentLoader(videoId);
+        return videoId;
     }
     
+    const commentLoader = (id) =>{
+        console.log(`Looking for comments for video id ${id}....`)
+    }
+
     return (
         <div>
             <form onSubmit={submitHandler}>
